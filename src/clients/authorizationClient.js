@@ -1,4 +1,6 @@
+
 import { AUTH_BASE_URL } from '@/utils/constanst'
+import axios from 'axios'
 
 /**
  * Cliente para la API de autenticación
@@ -12,22 +14,15 @@ export const authorizationClient = {
    */
   async getToken(user, password) {
     const url = `${AUTH_BASE_URL}/auth/token?user=${encodeURIComponent(user)}&password=${encodeURIComponent(password)}`
-    
-    const response = await fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-
-    if (!response.ok) {
-      if (response.status === 401) {
+    try {
+      const { data } = await axios.get(url)
+      return data
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
         throw new Error('Credenciales incorrectas')
       }
       throw new Error('Error de autenticación')
     }
-
-    return response.json()
   }
 }
 

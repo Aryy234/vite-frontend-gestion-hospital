@@ -1,200 +1,195 @@
+
 import { API_BASE_URL, STORAGE_KEYS } from '@/utils/constanst'
+import axios from 'axios'
 
-/**
- * Obtiene el token de localStorage
- */
 const getToken = () => localStorage.getItem(STORAGE_KEYS.TOKEN)
-
-/**
- * Headers con autorización Bearer
- */
 const getAuthHeaders = () => ({
   'Content-Type': 'application/json',
   'Authorization': `Bearer ${getToken()}`
 })
 
-/**
- * Maneja respuestas de la API
- */
-const handleResponse = async (response) => {
-  if (!response.ok) {
-    const error = await response.json().catch(() => ({}))
-    throw new Error(error.message || error.error || `Error ${response.status}`)
+const handleAxiosError = (error) => {
+  if (error.response && error.response.data) {
+    throw new Error(error.response.data.message || error.response.data.error || 'Error de API')
   }
-  
-  if (response.status === 204 || response.status === 201) {
-    return null
-  }
-  
-  return response.json()
+  throw new Error('Error de conexión')
 }
 
-/**
- * Cliente para la API de gestión hospitalaria
- */
 export const gestionHospitalClient = {
-  // ==================== DOCTORES ====================
   doctores: {
     async listar() {
-      const response = await fetch(`${API_BASE_URL}/doctores`, {
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        const { data } = await axios.get(`${API_BASE_URL}/doctores`, { headers: getAuthHeaders() })
+        return data
+      } catch (error) {
+        handleAxiosError(error)
+      }
     },
-
     async obtener(id) {
-      const response = await fetch(`${API_BASE_URL}/doctores/${id}`, {
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        const { data } = await axios.get(`${API_BASE_URL}/doctores/${id}`, { headers: getAuthHeaders() })
+        return data
+      } catch (error) {
+        handleAxiosError(error)
+      }
     },
-
     async crear(doctor) {
-      const response = await fetch(`${API_BASE_URL}/doctores`, {
-        method: 'POST',
-        headers: getAuthHeaders(),
-        body: JSON.stringify(doctor)
-      })
-      return handleResponse(response)
+      try {
+        await axios.post(`${API_BASE_URL}/doctores`, doctor, { headers: getAuthHeaders() })
+        return true
+      } catch (error) {
+        handleAxiosError(error)
+        return false
+      }
     },
-
     async actualizar(id, doctor) {
-      const response = await fetch(`${API_BASE_URL}/doctores/${id}`, {
-        method: 'PUT',
-        headers: getAuthHeaders(),
-        body: JSON.stringify(doctor)
-      })
-      return handleResponse(response)
+      try {
+        await axios.put(`${API_BASE_URL}/doctores/${id}`, doctor, { headers: getAuthHeaders() })
+        return true
+      } catch (error) {
+        handleAxiosError(error)
+        return false
+      }
     },
-
     async eliminar(id) {
-      const response = await fetch(`${API_BASE_URL}/doctores/${id}`, {
-        method: 'DELETE',
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        await axios.delete(`${API_BASE_URL}/doctores/${id}`, { headers: getAuthHeaders() })
+        return true
+      } catch (error) {
+        handleAxiosError(error)
+        return false
+      }
     },
-
     async obtenerCitas(id) {
-      const response = await fetch(`${API_BASE_URL}/doctores/${id}/citas`, {
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        const { data } = await axios.get(`${API_BASE_URL}/doctores/${id}/citas`, { headers: getAuthHeaders() })
+        return data
+      } catch (error) {
+        handleAxiosError(error)
+      }
     }
   },
-
-  // ==================== PACIENTES ====================
   pacientes: {
     async listar() {
-      const response = await fetch(`${API_BASE_URL}/pacientes`, {
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        const { data } = await axios.get(`${API_BASE_URL}/pacientes`, { headers: getAuthHeaders() })
+        return data
+      } catch (error) {
+        handleAxiosError(error)
+      }
     },
-
     async obtener(id) {
-      const response = await fetch(`${API_BASE_URL}/pacientes/${id}`, {
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        const { data } = await axios.get(`${API_BASE_URL}/pacientes/${id}`, { headers: getAuthHeaders() })
+        return data
+      } catch (error) {
+        handleAxiosError(error)
+      }
     },
-
     async crear(paciente) {
-      const response = await fetch(`${API_BASE_URL}/pacientes`, {
-        method: 'POST',
-        headers: getAuthHeaders(),
-        body: JSON.stringify(paciente)
-      })
-      return handleResponse(response)
+      try {
+        await axios.post(`${API_BASE_URL}/pacientes`, paciente, { headers: getAuthHeaders() })
+        return true
+      } catch (error) {
+        handleAxiosError(error)
+        return false
+      }
     },
-
     async actualizar(id, paciente) {
-      const response = await fetch(`${API_BASE_URL}/pacientes/${id}`, {
-        method: 'PUT',
-        headers: getAuthHeaders(),
-        body: JSON.stringify(paciente)
-      })
-      return handleResponse(response)
+      try {
+        await axios.put(`${API_BASE_URL}/pacientes/${id}`, paciente, { headers: getAuthHeaders() })
+        return true
+      } catch (error) {
+        handleAxiosError(error)
+        return false
+      }
     },
-
     async eliminar(id) {
-      const response = await fetch(`${API_BASE_URL}/pacientes/${id}`, {
-        method: 'DELETE',
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        await axios.delete(`${API_BASE_URL}/pacientes/${id}`, { headers: getAuthHeaders() })
+        return true
+      } catch (error) {
+        handleAxiosError(error)
+        return false
+      }
     },
-
     async obtenerCitas(id) {
-      const response = await fetch(`${API_BASE_URL}/pacientes/${id}/citas`, {
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        const { data } = await axios.get(`${API_BASE_URL}/pacientes/${id}/citas`, { headers: getAuthHeaders() })
+        return data
+      } catch (error) {
+        handleAxiosError(error)
+      }
     }
   },
-
-  // ==================== CITAS ====================
   citas: {
     async listar() {
-      const response = await fetch(`${API_BASE_URL}/citas`, {
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        const { data } = await axios.get(`${API_BASE_URL}/citas`, { headers: getAuthHeaders() })
+        return data
+      } catch (error) {
+        handleAxiosError(error)
+      }
     },
-
     async obtener(id) {
-      const response = await fetch(`${API_BASE_URL}/citas/${id}`, {
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        const { data } = await axios.get(`${API_BASE_URL}/citas/${id}`, { headers: getAuthHeaders() })
+        return data
+      } catch (error) {
+        handleAxiosError(error)
+      }
     },
-
     async crear(cita) {
-      const response = await fetch(`${API_BASE_URL}/citas`, {
-        method: 'POST',
-        headers: getAuthHeaders(),
-        body: JSON.stringify(cita)
-      })
-      return handleResponse(response)
+      try {
+        await axios.post(`${API_BASE_URL}/citas`, cita, { headers: getAuthHeaders() })
+        return true
+      } catch (error) {
+        handleAxiosError(error)
+        return false
+      }
     },
-
     async actualizar(id, cita) {
-      const response = await fetch(`${API_BASE_URL}/citas/${id}`, {
-        method: 'PUT',
-        headers: getAuthHeaders(),
-        body: JSON.stringify(cita)
-      })
-      return handleResponse(response)
+      try {
+        await axios.put(`${API_BASE_URL}/citas/${id}`, cita, { headers: getAuthHeaders() })
+        return true
+      } catch (error) {
+        handleAxiosError(error)
+        return false
+      }
     },
-
     async eliminar(id) {
-      const response = await fetch(`${API_BASE_URL}/citas/${id}`, {
-        method: 'DELETE',
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        await axios.delete(`${API_BASE_URL}/citas/${id}`, { headers: getAuthHeaders() })
+        return true
+      } catch (error) {
+        handleAxiosError(error)
+        return false
+      }
     },
-
     async cancelar(id) {
-      const response = await fetch(`${API_BASE_URL}/citas/${id}/cancelar`, {
-        method: 'PUT',
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        await axios.put(`${API_BASE_URL}/citas/${id}/cancelar`, {}, { headers: getAuthHeaders() })
+        return true
+      } catch (error) {
+        handleAxiosError(error)
+        return false
+      }
     },
-
     async listarPorDoctor(idDoctor) {
-      const response = await fetch(`${API_BASE_URL}/citas/doctor/${idDoctor}`, {
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        const { data } = await axios.get(`${API_BASE_URL}/citas/doctor/${idDoctor}`, { headers: getAuthHeaders() })
+        return data
+      } catch (error) {
+        handleAxiosError(error)
+      }
     },
-
     async listarPorPaciente(idPaciente) {
-      const response = await fetch(`${API_BASE_URL}/citas/paciente/${idPaciente}`, {
-        headers: getAuthHeaders()
-      })
-      return handleResponse(response)
+      try {
+        const { data } = await axios.get(`${API_BASE_URL}/citas/paciente/${idPaciente}`, { headers: getAuthHeaders() })
+        return data
+      } catch (error) {
+        handleAxiosError(error)
+      }
     }
   }
 }
