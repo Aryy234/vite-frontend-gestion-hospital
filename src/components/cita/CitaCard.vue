@@ -75,7 +75,11 @@ const estadoClass = computed(() => {
 })
 
 const formatDate = (dateString) => {
-  const date = new Date(dateString)
+  if (!dateString) return 'Fecha no válida'
+  const cleanDate = dateString.replace(/\[UTC\]$/, '')
+  const date = new Date(cleanDate)
+  if (isNaN(date.getTime())) return 'Fecha no válida'
+  
   return date.toLocaleString('es-ES', {
     dateStyle: 'medium',
     timeStyle: 'short'

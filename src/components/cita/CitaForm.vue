@@ -110,27 +110,27 @@ const form = ref({
 
 const formatDateForInput = (dateString) => {
   if (!dateString) return ''
-  const date = new Date(dateString)
+  // Limpiar formato [UTC] si existe
+  const cleanDate = dateString.replace(/\[UTC\]$/, '')
+  const date = new Date(cleanDate)
+  if (isNaN(date.getTime())) return ''
+  
   const offset = date.getTimezoneOffset()
   const localDate = new Date(date.getTime() - (offset * 60 * 1000))
   return localDate.toISOString().slice(0, 16)
 }
 
 watch(() => props.cita, (newCita) => {
-  if (newCita) {
-    form.value = {
-      id_doctor: newCita.id_doctor || '',
-      id_paciente: newCita.id_paciente || '',
-      fecha_hora: formatDateForInput(newCita.fecha_hora),
-      estado: newCita.estado || 'Agendada'
-    }
-  } else {
-    form.value = {
-      id_doctor: '',
-      id_paciente: '',
-      fecha_hora: '',
-      estado: 'Agendada'
-    }
+  form.value = newCita ? {
+    id_doctor: newCita.id_doctor || '',
+    id_paciente: newCita.id_paciente || '',
+    fecha_hora: formatDateForInput(newCita.fecha_hora),
+    estado: newCita.estado || 'Agendada'
+  } : {
+    id_doctor: '',
+    id_paciente: '',
+    fecha_hora: '',
+    estado: 'Agendada'
   }
 }, { immediate: true })
 
@@ -141,9 +141,7 @@ const handleSubmit = () => {
     fecha_hora: new Date(form.value.fecha_hora).toISOString()
   }
   
-  if (isEditing.value) {
-    citaData.estado = form.value.estado
-  }
+  if (isEditing.value) citaData.estado = form.value.estado
   
   emit('submit', citaData)
 }

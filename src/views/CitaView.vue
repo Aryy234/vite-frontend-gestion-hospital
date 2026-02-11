@@ -20,14 +20,14 @@
           <aside class="cita-sidebar">
             <CalendarioCitas 
               :citas="citas" 
-              @selectDate="handleSelectDate"
+              @selectDate="selectedDate = $event"
             />
 
             <div class="filters">
               <h4>Filtros</h4>
               <div class="filter-group">
                 <label>Doctor</label>
-                <select v-model="filterDoctor" @change="applyFilters">
+                <select v-model="filterDoctor">
                   <option value="">Todos</option>
                   <option 
                     v-for="doctor in doctores" 
@@ -139,15 +139,17 @@ const filteredCitas = computed(() => {
   
   if (selectedDate.value) {
     result = result.filter(c => {
-      const citaDate = new Date(c.fecha_hora)
+      const cleanDate = c.fecha_hora.replace(/\[UTC\]$/, '')
+      const citaDate = new Date(cleanDate)
       return citaDate.toDateString() === selectedDate.value.toDateString()
     })
   }
   
-  // Ordenar por fecha
-  result.sort((a, b) => new Date(a.fecha_hora) - new Date(b.fecha_hora))
-  
-  return result
+  return result.sort((a, b) => {
+    const dateA = new Date(a.fecha_hora.replace(/\[UTC\]$/, ''))
+    const dateB = new Date(b.fecha_hora.replace(/\[UTC\]$/, ''))
+    return dateA - dateB
+  })
 })
 
 onMounted(async () => {
@@ -157,14 +159,6 @@ onMounted(async () => {
     listarPacientes()
   ])
 })
-
-const handleSelectDate = (date) => {
-  selectedDate.value = date
-}
-
-const applyFilters = () => {
-  // Los filtros se aplican automáticamente vía computed
-}
 
 const openCreateModal = () => {
   selectedCita.value = null
@@ -206,13 +200,9 @@ const closeCancelDialog = () => {
 
 const handleSubmit = async (citaData) => {
   formError.value = null
-  let success = false
-
-  if (isEditing.value) {
-    success = await actualizarCita(selectedCita.value.id_cita, citaData)
-  } else {
-    success = await crearCita(citaData)
-  }
+  const success = isEditing.value 
+    ? await actualizarCita(selectedCita.value.id_cita, citaData)
+    : await crearCita(citaData)
 
   if (success) {
     closeModal()
@@ -222,17 +212,13 @@ const handleSubmit = async (citaData) => {
 }
 
 const handleDelete = async () => {
-  if (selectedCita.value) {
-    await eliminarCita(selectedCita.value.id_cita)
-    closeDeleteDialog()
-  }
+  await eliminarCita(selectedCita.value.id_cita)
+  closeDeleteDialog()
 }
 
 const confirmCancelCita = async () => {
-  if (selectedCita.value) {
-    await cancelarCita(selectedCita.value.id_cita)
-    closeCancelDialog()
-  }
+  await cancelarCita(selectedCita.value.id_cita)
+  closeCancelDialog()
 }
 </script>
 
