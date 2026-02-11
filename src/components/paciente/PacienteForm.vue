@@ -109,86 +109,81 @@ const handleSubmit = () => {
 </script>
 
 <style scoped>
+/* Minimalista, moderno y profesional */
 .paciente-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
-
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
-
 .form-group label {
   color: #1a2332;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
-
 .form-group input {
-  padding: 10px 12px;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: border-color 0.2s;
+  padding: 12px 16px;
+  border: 2px solid #e8eef3;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s;
+  background: #fff;
 }
-
 .form-group input:focus {
   outline: none;
   border-color: #1a2332;
+  box-shadow: 0 0 0 3px rgba(26,35,50,0.08);
 }
-
-.form-group input::placeholder {
-  color: #9ca3af;
-}
-
+.form-group input::placeholder { color: #9ca3af; }
 .form-error {
   color: #dc3545;
   font-size: 14px;
-  padding: 12px;
-  background: #ffe6e6;
-  border-radius: 6px;
+  padding: 14px 16px;
+  background: #f8d7da;
+  border-radius: 8px;
+  font-weight: 500;
 }
-
 .form-actions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
   margin-top: 8px;
 }
-
 .btn {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  letter-spacing: 0.5px;
 }
-
 .btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
 }
-
 .btn-secondary {
   background: #e8eef3;
   color: #1a2332;
 }
-
 .btn-secondary:hover:not(:disabled) {
   background: #d1dbe3;
+  transform: translateY(-1px);
 }
-
 .btn-primary {
   background: #1a2332;
-  color: #ffffff;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(26,35,50,0.15);
 }
-
 .btn-primary:hover:not(:disabled) {
   background: #2c3e50;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26,35,50,0.25);
 }
 </style>

@@ -1,11 +1,35 @@
 <template>
-  <RouterView />
+  <div class="app-layout">
+    <Header />
+    <div class="app-content">
+      <RouterView />
+    </div>
+    <Footer />
+  </div>
 </template>
 
 <script setup>
+import Footer from '@/components/common/Footer.vue'
+import Header from '@/components/common/Header.vue'
 </script>
 
 <style>
+html, body, #app, .app-layout {
+  height: 100%;
+  min-height: 100vh;
+}
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+}
+.app-content {
+  flex: 1 0 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
 /* Reset y estilos globales */
 *,
 *::before,

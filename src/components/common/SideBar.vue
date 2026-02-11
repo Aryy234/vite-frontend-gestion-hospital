@@ -13,25 +13,26 @@
 </script>
 
 <style scoped>
+/* Minimalista, moderno y profesional */
 .sidebar {
-  background: #e8eef3;
-  border-radius: 8px;
-  padding: 20px;
-  min-width: 220px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(26,35,50,0.08);
+  padding: 24px;
+  min-width: 240px;
 }
-
 .sidebar-header h3 {
   color: #1a2332;
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0 0 16px 0;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #d1dbe3;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #e8eef3;
+  letter-spacing: 0.5px;
 }
-
 .sidebar-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 </style>

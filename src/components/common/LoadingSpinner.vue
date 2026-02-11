@@ -15,32 +15,30 @@ defineProps({
 </script>
 
 <style scoped>
+/* Minimalista, moderno y profesional */
 .loading-spinner {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 48px;
 }
-
 .spinner {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border: 4px solid #e8eef3;
   border-top-color: #1a2332;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 0.8s linear infinite;
 }
-
 .loading-spinner p {
-  margin-top: 16px;
+  margin-top: 20px;
   color: #5a6c7d;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
-
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 </style>

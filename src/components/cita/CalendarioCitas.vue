@@ -127,103 +127,98 @@ const selectDay = (day) => {
 </script>
 
 <style scoped>
+/* Minimalista, moderno y profesional */
 .calendario-citas {
-  background: #ffffff;
-  border-radius: 8px;
-  padding: 16px;
-  border: 1px solid #e0e0e0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(26,35,50,0.08);
+  padding: 20px;
 }
-
 .calendario-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
-
 .calendario-header h3 {
   margin: 0;
   color: #1a2332;
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: 700;
   text-transform: capitalize;
+  letter-spacing: 0.5px;
 }
-
 .nav-btn {
   background: #e8eef3;
   border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 700;
   color: #1a2332;
-  transition: background 0.2s;
+  transition: all 0.2s;
 }
-
 .nav-btn:hover {
-  background: #d1dbe3;
+  background: #1a2332;
+  color: #fff;
 }
-
 .calendario-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+  gap: 6px;
 }
-
 .day-header {
   text-align: center;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   color: #5a6c7d;
-  padding: 8px 0;
+  padding: 10px 0;
+  letter-spacing: 0.5px;
 }
-
 .day-cell {
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   position: relative;
-  transition: background 0.2s;
+  transition: all 0.2s;
+  font-weight: 600;
 }
-
 .day-cell:hover:not(.other-month) {
   background: #e8eef3;
+  transform: scale(1.05);
 }
-
 .day-cell.other-month {
   color: #c0c0c0;
   cursor: default;
 }
-
 .day-cell.today {
   background: #1a2332;
-  color: #ffffff;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(26,35,50,0.3);
 }
-
 .day-cell.has-citas:not(.today) {
-  background: #e8f5e9;
+  background: #d4edda;
+  color: #28a745;
 }
-
-.day-number {
-  font-size: 14px;
-}
-
+.day-number { font-size: 15px; }
 .citas-badge {
   position: absolute;
-  bottom: 2px;
+  bottom: 4px;
   font-size: 10px;
   background: #28a745;
-  color: #ffffff;
-  padding: 1px 5px;
+  color: #fff;
+  padding: 2px 6px;
   border-radius: 10px;
+  font-weight: 700;
 }
-
 .day-cell.today .citas-badge {
-  background: #ffffff;
+  background: #fff;
   color: #1a2332;
 }
 </style>

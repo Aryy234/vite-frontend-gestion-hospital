@@ -223,128 +223,114 @@ const confirmCancelCita = async () => {
 </script>
 
 <style scoped>
+/* Minimalista, moderno y profesional */
 .cita-view {
   min-height: 100vh;
-  background: #ffffff;
+  background: #f8f9fa;
 }
-
-.main-content {
-  padding: 40px 24px;
-}
-
+.main-content { padding: 48px 24px; }
 .container {
   max-width: 1200px;
   margin: 0 auto;
 }
-
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
-
 .page-header h1 {
-  margin: 0 0 4px 0;
+  margin: 0 0 8px 0;
   color: #1a2332;
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
-
 .page-header p {
   margin: 0;
   color: #5a6c7d;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
 }
-
 .btn {
-  padding: 12px 24px;
+  padding: 14px 28px;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
+  letter-spacing: 0.5px;
 }
-
 .btn-primary {
   background: #1a2332;
-  color: #ffffff;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(26,35,50,0.2);
 }
-
 .btn-primary:hover {
   background: #2c3e50;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(26,35,50,0.3);
 }
-
 .error-message {
   color: #dc3545;
-  padding: 12px 16px;
-  background: #ffe6e6;
-  border-radius: 8px;
-  margin-bottom: 24px;
+  padding: 16px 20px;
+  background: #f8d7da;
+  border-radius: 10px;
+  margin-bottom: 28px;
+  font-weight: 600;
+  border-left: 4px solid #dc3545;
 }
-
 .cita-layout {
   display: flex;
-  gap: 24px;
+  gap: 28px;
 }
-
 .cita-sidebar {
-  width: 300px;
+  width: 320px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
-
-.cita-main {
-  flex: 1;
-}
-
+.cita-main { flex: 1; }
 .filters {
-  background: #e8eef3;
-  border-radius: 8px;
-  padding: 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(26,35,50,0.08);
+  padding: 24px;
 }
-
 .filters h4 {
-  margin: 0 0 16px 0;
+  margin: 0 0 20px 0;
   color: #1a2332;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
-
 .filter-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
-
 .filter-group label {
-  font-size: 12px;
-  color: #5a6c7d;
-}
-
-.filter-group select {
-  padding: 8px 12px;
-  border: 1px solid #d1dbe3;
-  border-radius: 6px;
   font-size: 14px;
-  background: #ffffff;
+  color: #1a2332;
+  font-weight: 600;
 }
-
+.filter-group select {
+  padding: 12px 16px;
+  border: 2px solid #e8eef3;
+  border-radius: 8px;
+  font-size: 15px;
+  background: #fff;
+  transition: all 0.2s;
+}
 .filter-group select:focus {
   outline: none;
   border-color: #1a2332;
+  box-shadow: 0 0 0 3px rgba(26,35,50,0.08);
 }
-
 @media (max-width: 768px) {
-  .cita-layout {
-    flex-direction: column;
-  }
-
-  .cita-sidebar {
-    width: 100%;
-  }
+  .cita-layout { flex-direction: column; }
+  .cita-sidebar { width: 100%; }
 }
 </style>

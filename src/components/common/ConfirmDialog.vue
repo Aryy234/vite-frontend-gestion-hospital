@@ -44,47 +44,45 @@ const cancel = () => {
 </script>
 
 <style scoped>
-.confirm-dialog {
-  text-align: center;
-}
-
+/* Minimalista, moderno y profesional */
+.confirm-dialog { text-align: center; }
 .confirm-message {
   color: #5a6c7d;
   font-size: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+  line-height: 1.5;
 }
-
 .confirm-actions {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
 }
-
 .btn {
-  padding: 10px 24px;
+  padding: 12px 28px;
   border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  letter-spacing: 0.5px;
 }
-
 .btn-secondary {
   background: #e8eef3;
   color: #1a2332;
 }
-
 .btn-secondary:hover {
   background: #d1dbe3;
+  transform: translateY(-1px);
 }
-
 .btn-danger {
   background: #dc3545;
-  color: #ffffff;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(220,53,69,0.3);
 }
-
 .btn-danger:hover {
   background: #c82333;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220,53,69,0.4);
 }
 </style>
